@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @file
- * Money class
- * Money Class based on Mathias Verraes Money/Money.
- */
-
 namespace Money;
 
 /**
@@ -39,8 +33,8 @@ class Money
     /**
      * Create a Money instance.
      *
-     * @param int $amount
-     *   Amount in euro cents
+     * @param float $amount
+     *   Amount in Euros
      * @param int $precision
      *   Decimal precision of the Money object
      */
@@ -245,8 +239,6 @@ class Money
 
     /**
      * Allocate the money according to a list of ratio's.
-     * TODO: Finish! Fix negative amount and positive share.
-     * Save if it's .5 to round down instead.
      *
      * @param array $ratios
      *   List of int/float ratio's
@@ -268,7 +260,7 @@ class Money
         // Edge case, when two or more values are exactly half.
         if ($remainder < 0) {
             $sort = $results;
-            usort($sort, function ($a, $b) {
+            usort($sort, function (Money $a, Money $b) {
                 return $b->compare($a);
             });
             for ($i = 0; $remainder < 0; $i++) {
@@ -280,7 +272,7 @@ class Money
             }
         } elseif ($remainder > 0) {
             $sort = $results;
-            usort($sort, function ($a, $b) {
+            usort($sort, function (Money $a, Money $b) {
                 return $a->compare($b);
             });
             for ($i = 0; $remainder > 0; $i++) {
