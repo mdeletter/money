@@ -1,0 +1,23 @@
+{
+  "name": "pdenooijer/money",
+  "description": "My view on how the Money class should be (simple Value Object).",
+  "keywords": ["Money", "Value Object"],
+  "license": "GPLv3",
+  "authors": [
+    {
+      "name": "Piet de Nooijer",
+      "email": "piet@denooijer.eu"
+    }
+  ],
+  "require": {
+    "php": ">=5.6"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  },
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  }
+}

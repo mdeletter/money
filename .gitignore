@@ -1,0 +1,9 @@
+# Editor settings
+.project
+.buildpath
+.settings
+.idea/
+
+# Build & Composer
+build/
+vendor/
