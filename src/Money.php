@@ -41,7 +41,7 @@ class Money
     public function __construct($amount, $precision = 2)
     {
         $this->precision = $precision;
-        $this->precisionCalc = 10 ^ $precision;
+        $this->precisionCalc = 10 ** $precision;
         $this->amount = (int) round($amount * $this->precisionCalc);
     }
 
@@ -230,8 +230,10 @@ class Money
      */
     public function divide($divisor, $rounding_mode = self::ROUND_HALF_UP)
     {
-        if ($divisor === 0 || $divisor < 0.01) {
+        if ($divisor === 0) {
             throw new InvalidArgumentException('Division by zero');
+        } elseif ($divisor < 1 / $this->precisionCalc) {
+            throw new InvalidArgumentException('Divisor to small!');
         }
         $this->amount = (int) round($this->amount / $divisor, 0, $rounding_mode);
         return $this;
@@ -248,12 +250,12 @@ class Money
      */
     public function allocate(array $ratios)
     {
-        $remainder = $this->getAmount();
+        $remainder = $this->amount;
         $results = [];
         $total = array_sum($ratios);
         foreach ($ratios as $ratio) {
-            $share = $this->amount * $ratio / $total;
-            $results[] = new Money($share, $this->precision);
+            $share = round($this->amount * $ratio / $total);
+            $results[] = new Money($share / $this->precisionCalc, $this->precision);
             $remainder -= $share;
         }
 
