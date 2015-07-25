@@ -254,7 +254,7 @@ class Money
         $results = [];
         $total = array_sum($ratios);
         foreach ($ratios as $ratio) {
-            $share = round($this->amount * $ratio / $total);
+            $share = (int) round($this->amount * $ratio / $total);
             $results[] = new Money($share / $this->precisionCalc, $this->precision);
             $remainder -= $share;
         }
