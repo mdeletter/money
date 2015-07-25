@@ -101,6 +101,17 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
         $this->assertEqualFloats($result[1]->getAmount(), 0.03);
         $this->assertEqualFloats($result[2]->getAmount(), 0.02);
 
+        $result = $a->allocate([2, 3, 1]);
+        $this->assertEqualFloats($result[0]->getAmount(), 0.03);
+        $this->assertEqualFloats($result[1]->getAmount(), 0.05);
+        $this->assertEqualFloats($result[2]->getAmount(), 0.02);
+
+        $result = $a->allocate([1, 1, 1, 1]);
+        $this->assertEqualFloats($result[0]->getAmount(), 0.03);
+        $this->assertEqualFloats($result[1]->getAmount(), 0.03);
+        $this->assertEqualFloats($result[2]->getAmount(), 0.02);
+        $this->assertEqualFloats($result[3]->getAmount(), 0.02);
+
         $b = new Money(-0.10);
         $result = $b->allocate([1,1]);
         $this->assertEqualFloats($result[0]->getAmount(), -0.05);
@@ -110,6 +121,17 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
         $this->assertEqualFloats($result[0]->getAmount(), -0.05);
         $this->assertEqualFloats($result[1]->getAmount(), -0.03);
         $this->assertEqualFloats($result[2]->getAmount(), -0.02);
+
+        $result = $b->allocate([2, 3, 1]);
+        $this->assertEqualFloats($result[0]->getAmount(), -0.03);
+        $this->assertEqualFloats($result[1]->getAmount(), -0.05);
+        $this->assertEqualFloats($result[2]->getAmount(), -0.02);
+
+        $result = $b->allocate([1, 1, 1, 1]);
+        $this->assertEqualFloats($result[0]->getAmount(), -0.03);
+        $this->assertEqualFloats($result[1]->getAmount(), -0.03);
+        $this->assertEqualFloats($result[2]->getAmount(), -0.02);
+        $this->assertEqualFloats($result[3]->getAmount(), -0.02);
     }
 
     /**
