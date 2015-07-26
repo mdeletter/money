@@ -224,16 +224,16 @@ class Money
      * @param int $rounding_mode
      *   Rounding mode
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return Money
      *   New Money object
      */
     public function divide($divisor, $rounding_mode = self::ROUND_HALF_UP)
     {
         if ($divisor === 0) {
-            throw new InvalidArgumentException('Division by zero');
+            throw new \InvalidArgumentException('Division by zero');
         } elseif ($divisor < 1 / $this->precisionCalc) {
-            throw new InvalidArgumentException('Divisor to small!');
+            throw new \InvalidArgumentException('Divisor to small!');
         }
         $this->amount = (int) round($this->amount / $divisor, 0, $rounding_mode);
         return $this;
