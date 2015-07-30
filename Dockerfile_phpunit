@@ -1,0 +1,15 @@
+FROM debian:jessie
+ 
+ENV DEBIAN_FRONTEND noninteractive
+ 
+RUN apt-get update -qqy
+RUN apt-get install -qqy php5-cli php5-json curl
+
+RUN echo 'date.timezone = Europe/Amsterdam' >> /etc/php5/cli/php.ini
+
+VOLUME ["/srv"]
+WORKDIR /srv
+RUN useradd tester
+USER tester
+
+ENTRYPOINT ["vendor/bin/phpunit"]
